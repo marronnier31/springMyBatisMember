@@ -9,7 +9,7 @@ import lombok.Data;
 public class Member {
 	private int no; 
 	private String id; 
-	private String pPw; 
+	private String pw; 
 	private String name; 
 	private Date regDate; 
 	private Date modDate; 
