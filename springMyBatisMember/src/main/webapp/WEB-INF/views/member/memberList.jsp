@@ -40,74 +40,50 @@
 
 <div class="list-container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3 class="fw-bold m-0">게시판 목록</h3>
-        <a href="/board/boardList" class="btn btn-write">전체게시판목록</a>
-        <a href="/board/insertForm" class="btn btn-write">글쓰기</a>
+        <h3 class="fw-bold m-0">회원 목록</h3>
+        <a href="/member/memberList" class="btn btn-write">전체회원목록</a>
+        <a href="/member/insertForm" class="btn btn-write">회원가입</a>
     </div>
 
     <table class="table table-hover">
         <thead>
             <tr>
                 <th class="text-center" style="width: 10%">번호</th>
-                <th style="width: 50%">제목</th>
-                <th style="width: 15%">작성자</th>
-                <th class="text-center" style="width: 25%">작성일</th>
+                <th style="width: 20%">ID</th>
+                <th style="width: 20%">PW</th>
+                <th style="width: 20%">NAME</th>
+                <th class="text-center" style="width: 30%">REGDATE</th>
             </tr>
         </thead>
         <tbody>
             <%-- 요청하신 대로 boardList 변수명 유지 --%>
-            <c:forEach var="boardList" items="${boardList}">
+            <c:forEach var="memberList" items="${memberList}">
                 <tr>
-                    <td class="text-center text-muted">${boardList.no}</td>
+                    <td class="text-center text-muted">${memberList.no}</td>
                     <td>
-                        <a href="/board/detail?no=${boardList.no}" class="post-title">
-                            ${boardList.title}
+                        <a href="/member/detail?no=${memberList.no}" class="post-title">
+                            ${memberList.id}
                         </a>
                     </td>
-                    <td>${boardList.writer}</td>
+                    <td>${memberList.pw}</td>
+                    <td>${memberList.name}</td>
                     <td class="text-center text-muted">
-                        <fmt:formatDate value="${boardList.regDate}" pattern="yyyy-MM-dd" />
+                        <fmt:formatDate value="${memberList.regDate}" pattern="yyyy-MM-dd" />
                     </td>
                 </tr>
             </c:forEach>
             
-            <c:if test="${empty boardList}">
+            <c:if test="${empty memberList}">
                 <tr>
-                    <td colspan="4" class="text-center py-5 text-muted">
-                        등록된 게시글이 없습니다. 첫 번째 주인공이 되어보세요!
+                    <td colspan="5" class="text-center py-5 text-muted">
+                        등록된 회원이 없습니다. 
                     </td>
                 </tr>
             </c:if>
         </tbody>
     </table>
 
-    <div class="search-area mt-5">
-        <form action="/board/search" method="get" class="d-flex justify-content-center">
-            <div class="input-group" style="max-width: 450px;">
-                <select name="searchType" class="form-select" style="max-width: 100px;">
-                    <option value="title" selected>제목</option>
-                    <option value="writer">작성자</option>
-                    <option value="content">내용</option>
-                </select>
-                <input type="text" name="keyword" class="form-control" placeholder="어떤 글을 찾으시나요?">
-                <button class="btn btn-search" type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                    </svg>
-                </button>
-            </div>
-        </form>
-    </div>
-
-    <nav class="mt-4">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">다음</a></li>
-        </ul>
-    </nav>
+   
 </div>
 
 </body>

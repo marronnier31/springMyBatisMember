@@ -3,8 +3,8 @@
 <mapper namespace="com.zeus.mapper.MemberMapper">
 	<!-- 외부 조인을 사용하여 얻은 검색 결과에 대한 매핑을 정의한다. -->
 	<resultMap type="Member" id="memberMap">
-		<id property="no" column="nno" />
-		<result property="no" column="nno" />
+		<id property="no" column="no" />
+		<result property="no" column="no" />
 		<result property="id" column="id" />
 		<result property="pw" column="pw" />
 		<result property="name" column="name" />
@@ -34,7 +34,7 @@
 
 	<update id="update">
 		UPDATE mybatisMember
-		SET name =#{name}
+		SET name =#{name}, pw = #{pw}
 		WHERE no = #{no}
 	</update>
 

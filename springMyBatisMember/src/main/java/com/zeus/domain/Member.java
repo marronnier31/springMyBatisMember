@@ -11,7 +11,6 @@ public class Member {
 	private String id; 
 	private String pw; 
 	private String name; 
-	private int coin;
 	private Date regDate; 
 	private Date modDate; 
 	 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,26 +28,45 @@
 
 <div class="detail-container">
     <div class="detail-header">
-        <div class="detail-title">${board.title}</div>
+        <div class="detail-title">${member.name}</div>
         <div class="detail-meta">
-            <span><strong>작성자:</strong> ${board.writer}</span>
-            <span><strong>작성일:</strong> <fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd HH:mm" /></span>
-            <span><strong>번호:</strong> ${board.no}</span>
+            <span><strong>아이디</strong> ${member.id}</span>
+            <span><strong>비밀번호</strong> ${member.pw}</span>
+            <span><strong>작성일:</strong> <fmt:formatDate value="${member.regDate}" pattern="yyyy-MM-dd HH:mm" /></span>
+            <span><strong>번호:</strong> ${member.no}</span>
         </div>
     </div>
 
     <div class="detail-body">
-        <%-- 줄바꿈 처리를 위해 style="white-space: pre-wrap;" 사용 --%>
-        <div style="white-space: pre-wrap;">${board.content}</div>
+    <form:form modelAttribute="member"> 
+   <form:select path="authList[0].auth" disabled="true">
+                <form:option value="" label="=== 선택해 주세요 ===" />
+                <form:option value="ROLE_USER" label="사용자" />
+                <form:option value="ROLE_MEMBER" label="회원" />
+                <form:option value="ROLE_ADMIN" label="관리자" />
+            </form:select>
+            <form:select path="authList[1].auth" disabled="true">
+                <form:option value="" label="=== 선택해 주세요 ===" />
+                <form:option value="ROLE_USER" label="사용자" />
+                <form:option value="ROLE_MEMBER" label="회원" />
+                <form:option value="ROLE_ADMIN" label="관리자" />
+            </form:select>
+            <form:select path="authList[2].auth" disabled="true">
+                <form:option value="" label="=== 선택해 주세요 ===" />
+                <form:option value="ROLE_USER" label="사용자" />
+                <form:option value="ROLE_MEMBER" label="회원" />
+                <form:option value="ROLE_ADMIN" label="관리자" />
+            </form:select>
+       </form:form>
     </div>
 
     <div class="detail-footer d-flex justify-content-between">
-        <a href="/board/boardList" class="btn btn-outline-secondary btn-custom">목록으로</a>
+        <a href="/member/memberList" class="btn btn-outline-secondary btn-custom">목록으로</a>
         
         <div class="d-flex gap-2">
-            <a href="/board/updateForm?no=${board.no}" class="btn btn-primary btn-custom">수정하기</a>
+            <a href="/member/updateForm?no=${member.no}" class="btn btn-primary btn-custom">수정하기</a>
             <%-- 삭제는 보통 JS로 확인 후 진행하므로 간단히 구현 --%>
-            <button type="button" class="btn btn-danger btn-custom" onclick="deletePost(${board.no})">삭제하기</button>
+            <button type="button" class="btn btn-danger btn-custom" onclick="deletePost(${member.no})">삭제하기</button>
         </div>
     </div>
 </div>
@@ -54,7 +74,7 @@
 <script>
     function deletePost(no) {
         if(confirm("정말 이 게시글을 삭제하시겠습니까?")) {
-            location.href = "/board/delete?no=" + no;
+            location.href = "/member/delete?no=" + no;
         }
     }
 </script>
