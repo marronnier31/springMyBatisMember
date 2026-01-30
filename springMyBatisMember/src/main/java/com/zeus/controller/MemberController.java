@@ -97,32 +97,31 @@ public class MemberController {
 		model.addAttribute("message", "%s 님의 정보 수정이 실패되었습니다.".formatted(member.getName()));
 		return "member/failed";
 	}
-	/*
+	
 	@GetMapping("/delete")
-	public String boaradDelete(Board b,Model model) {
-		log.info("boaradDelete board = " + b.toString());
+	public String memberDelete(Member m,Model model) {
+		log.info("memberDelete member = " + m.toString());
 		try {
-			int count = boardService.delete(b);
+			int count = memberService.delete(m);
 			if(count > 0) {
-				model.addAttribute("message", "%d 님의 정보가 삭제되었습니다.".formatted(b.getNo()));
-				return "board/success";
+				model.addAttribute("message", "%d 님의 회원탈퇴성공.".formatted(m.getNo()));
+				return "member/success";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		model.addAttribute("message", "%d 님의 정보가 삭제 실패되었습니다.".formatted(b.getNo()));
-		return "board/failed";
+		model.addAttribute("message", "%d 님의 회원탈퇴실패.".formatted(m.getNo()));
+		return "member/failed";
 	}
-	
-	
+
 	@GetMapping("/search")
-	public String search(Board board, Model model) {
-		log.info("boaradSearch  = "+ board.toString());
+	public String search(Member member, Model model) {
+		log.info("memberSearch  = "+ member.toString());
 		try {
-			List<Board> boardList = boardService.search(board);
-			model.addAttribute("boardList", boardList);
+			List<Member> memberList = memberService.search(member);
+			model.addAttribute("memberList", memberList);
 		} catch (Exception e) {e.printStackTrace();}
-		return "board/boardList";
+		return "member/memberList";
 	}
-	*/
+
 }
