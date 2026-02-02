@@ -18,21 +18,21 @@ import lombok.extern.slf4j.Slf4j;
 @Aspect
 public class ServiceLoggerAdvice {
 	
-	@Before("execution(* com.zeus.service.ItemService*.*(..))")
+	@Before("execution(* com.zeus.service.MemberService*.*(..))")
 	public void beforeLog(JoinPoint jp) {
 		log.info("Aspect beforeLog");
 		log.info("Aspect beforeLog jp = " + jp.getSignature());
 		log.info("Aspect beforeLog jp = " + Arrays.toString(jp.getArgs()));
 	}
 	
-	@After("execution(* com.zeus.service.ItemService*.*(..))")
+	@After("execution(* com.zeus.service.MemberService*.*(..))")
 	public void afterLog(JoinPoint jp) {
 		log.info("Aspect afterLog");
 		log.info("Aspect afterLog jp = " + jp.getSignature());
 		log.info("Aspect afterLog jp = " + Arrays.toString(jp.getArgs()));
 	}
 	
-	@AfterReturning(pointcut = "execution(* com.zeus.service.ItemService*.*(..))", returning = "result")
+	@AfterReturning(pointcut = "execution(* com.zeus.service.MemberService*.*(..))", returning = "result")
 	public void afterReturning(JoinPoint jp, Object result) {
 		log.info("Aspect afterReturning");
 		log.info("Aspect afterReturning jp = " + jp.getSignature());
@@ -40,7 +40,7 @@ public class ServiceLoggerAdvice {
 		log.info("Aspect afterReturning result = " + result.toString());
 	}
 	
-	@Around("execution(* com.zeus.service.ItemService*.*(..))")
+	@Around("execution(* com.zeus.service.MemberService*.*(..))")
 	public Object aroundLog(ProceedingJoinPoint pjp) throws Throwable {
 		long startTime = System.currentTimeMillis();
 		log.info(Arrays.toString(pjp.getArgs()));
